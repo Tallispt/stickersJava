@@ -19,22 +19,22 @@ public class JsonParser {
 
     String[] items = matcher.group(1).split("\\},\\{");
 
-    List<Map<String, String>> dados = new ArrayList<>();
+    List<Map<String, String>> data = new ArrayList<>();
 
     for (String item : items) {
 
-        Map<String, String> atributosItem = new HashMap<>();
+        Map<String, String> itemAtributes = new HashMap<>();
 
-        Matcher matcherAtributosJson = REGEX_ATRIBUTOS_JSON.matcher(item);
-        while (matcherAtributosJson.find()) {
-            String atributo = matcherAtributosJson.group(1);
-            String valor = matcherAtributosJson.group(2);
-            atributosItem.put(atributo, valor);
+        Matcher matcherJsonAtributes = REGEX_ATRIBUTOS_JSON.matcher(item);
+        while (matcherJsonAtributes.find()) {
+            String atribute = matcherJsonAtributes.group(1);
+            String value = matcherJsonAtributes.group(2);
+            itemAtributes.put(atribute, value);
         }
 
-        dados.add(atributosItem);
+        data.add(itemAtributes);
     }
 
-    return dados;
+    return data;
   }
 }

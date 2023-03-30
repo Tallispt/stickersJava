@@ -23,7 +23,6 @@ public class StickersGenerator {
 
     int fontSize = 100;
     int textWidth = text.length() * (fontSize / 2);
-    System.out.println(textWidth);
     Font font = new Font(Font.SANS_SERIF, Font.BOLD, fontSize);
     graphics.setColor(Color.BLUE);
     graphics.setFont(font);

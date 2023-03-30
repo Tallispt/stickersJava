@@ -1,42 +1,26 @@
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpResponse.BodyHandlers;
 import java.util.List;
-import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws Exception {
+        
+        ApiUrls apiUrl = ApiUrls.IMDB_SERIES;
 
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+        String url = apiUrl.getUrl();
+        ContentExtractor extractor = apiUrl.getExtractor();
+
+        var http = new Client();
+        String jsonBody = http.dataSearch(url);
         
-        URI address = URI.create(url);
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder(address).GET().build();
-        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-        String body = response.body();
-        
-        var parser = new JsonParser();
-        List<Map<String, String>> moviesList = parser.parse(body);
-        
-        Map<String, String> movie = moviesList.get(0);
-        String imageUrl = movie.get("image");
-        String title = movie.get("title");
-        InputStream inputStream = new URL(imageUrl).openStream();
+        List<Content> list = extractor.contentExtractor(jsonBody);
         StickersGenerator stickersGenerator = new StickersGenerator();
-        stickersGenerator.Create(inputStream, title + ".png", title);
 
-        // for (Map<String, String> movie : moviesList) {
-        //     String imageUrl = movie.get("image");
-        //     String title = movie.get("title");
-        //     InputStream inputStream = new URL(imageUrl).openStream();
-        //     StickersGenerator stickersGenerator = new StickersGenerator();
-        //     stickersGenerator.Create(inputStream, title + ".png", title);
-        // }
-
-
+        for (int i = 0; i < list.size(); i++) {
+            Content content = list.get(i);
+            InputStream inputStream = new URL(content.getImageUrl()).openStream();
+            String title = content.getTitle();
+            stickersGenerator.Create(inputStream, title + ".png", title);
+        }
     }
 }
