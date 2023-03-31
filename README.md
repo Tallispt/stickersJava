@@ -1,18 +1,8 @@
-## Getting Started
+## Java Stricker Maker
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Sticker Maker is a proof-of-concept project written in Java that leverages various APIs, such as NASA and IMDB, to retrieve images and add titles to the bottom of them. The project showcases the application of object-oriented programming principles, including the use of classes, methods, getters, setters, enums, and interfaces. Additionally, the project employs JSON parsing using regex, among other techniques, to achieve its functionality.
 
 ## Folder Structure
 
-The workspace contains two folders by default, where:
-
 - `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+- `asset`: the folder to inject stickers
