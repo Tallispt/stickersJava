@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,14 +22,22 @@ public class StickersGenerator {
     Graphics2D graphics = (Graphics2D) newImage.getGraphics();
     graphics.drawImage(originalImage, 0, 0, null);
 
-    int fontSize = 100;
-    int textWidth = text.length() * (fontSize / 2);
+    int fontSize = 32;
     Font font = new Font(Font.SANS_SERIF, Font.BOLD, fontSize);
-    graphics.setColor(Color.BLUE);
+    graphics.setColor(Color.CYAN);
+    FontMetrics metrics = graphics.getFontMetrics(font);
+    while (metrics.stringWidth(text) + 240 < width) {   
+      fontSize = fontSize + 2;
+      font = new Font(Font.SANS_SERIF, Font.BOLD, fontSize);
+      graphics.setColor(Color.CYAN);
+      metrics = graphics.getFontMetrics(font);
+    }
+
+    int x = (width - metrics.stringWidth(text)) / 2;
+    int y = height + (((newHeight - height) - metrics.getHeight()) / 2) + metrics.getAscent();
+
     graphics.setFont(font);
-    int stringHeigth = (int) Math.round(newHeight - (height * 0.1));
-    int stringWidth = (int) Math.round((width - textWidth) /2);
-    graphics.drawString(text, stringWidth, stringHeigth);
+    graphics.drawString(text, x, y);
 
     ImageIO.write(newImage, "png", new File("asset/" + fileName));
   }

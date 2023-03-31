@@ -5,7 +5,7 @@ import java.util.List;
 public class App {
     public static void main(String[] args) throws Exception {
         
-        ApiUrls apiUrl = ApiUrls.IMDB_SERIES;
+        ApiUrls apiUrl = ApiUrls.IMDB_MOVIES;
 
         String url = apiUrl.getUrl();
         ContentExtractor extractor = apiUrl.getExtractor();
