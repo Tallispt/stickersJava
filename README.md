@@ -5,4 +5,4 @@ Sticker Maker is a proof-of-concept project written in Java that leverages vario
 ## Folder Structure
 
 - `src`: the folder to maintain sources
-- `asset`: the folder to inject stickers
+- `asset`: the folder to inject stickers (if not found, add 'asset' directory to root)
